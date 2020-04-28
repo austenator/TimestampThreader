@@ -1,0 +1,26 @@
+{
+  "name": "instagram-timestamp-threader",
+  "version": "1.0.0",
+  "description": "Threads media timestamps for posts, stories, and direct messages with downloaded media.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/austenator/InstagramTimestampThreader.git"
+  },
+  "keywords": [
+    "instagram",
+    "downloaded",
+    "data",
+    "posts",
+    "stories"
+  ],
+  "author": "Austen Henry",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/austenator/InstagramTimestampThreader/issues"
+  },
+  "homepage": "https://github.com/austenator/InstagramTimestampThreader#readme"
+}
