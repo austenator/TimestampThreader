@@ -1,5 +1,11 @@
+const fs = require('fs');
+const path = require('path');
+
 
 function threadTimestampsWithMedia() {
+    const pathToParentFolder = path.join(__dirname, 'TestParentFolder');
+    const pathToOutputFolder = path.join(__dirname, 'TestOutputFolder');;
+
     // Read in media folder (part 2 for instagram)
 
     // Read in media.json which contains timestamps
@@ -20,5 +26,4 @@ function threadTimestampsWithMedia() {
         // ...
 
     // Handle profile
-
 }
