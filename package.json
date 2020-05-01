@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "Threads downloaded social media data with their respective timestamps.",
   "main": "src/index.js",
+  "type": "module",
   "scripts": {
-    "start": "node src/ReadMediaJson.js",
+    "start": "node src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
