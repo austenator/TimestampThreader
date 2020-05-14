@@ -13,6 +13,10 @@ public class MediaCopier {
    * @param destination The path of the copied file to create.
    */
   public void copy(final Path source, final Path destination) {
+    if (Files.exists(destination)) {
+      return;
+    }
+
     try {
       Files.copy(source, destination, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.COPY_ATTRIBUTES);
     } catch (UnsupportedOperationException e) {
