@@ -22,6 +22,17 @@ import java.io.OutputStream;
  * IN PROGRESS
  */
 public class MediaMetadataHandler {
+
+  public void readMetadata(final File source) {
+    try {
+      final ImageMetadata metadata = Imaging.getMetadata(source);
+      final JpegImageMetadata jpegMetadata = (JpegImageMetadata) metadata;
+      final TiffImageMetadata exif = jpegMetadata.getExif();
+      TiffOutputSet outputSet = exif.getOutputSet();
+    } catch ( IOException | ImageReadException | ImageWriteException e) {
+      throw new RuntimeException("Something went wrong when reading metadata for: " + source.getAbsolutePath(), e);
+    }
+  }
   /**
    * This example illustrates how to add/update EXIF metadata in a JPEG file.
    *
@@ -33,7 +44,7 @@ public class MediaMetadataHandler {
    * @throws ImageReadException
    * @throws ImageWriteException
    */
-  public void changeMetadata(final File source, final File destination)
+  private void changeMetadata(final File source, final File destination)
       throws IOException, ImageReadException, ImageWriteException {
 
     try (FileOutputStream fos = new FileOutputStream(destination);
@@ -67,6 +78,9 @@ public class MediaMetadataHandler {
       if (null == outputSet) {
         outputSet = new TiffOutputSet();
       }
+
+
+
 
       {
         // Example of how to add a field/tag to the output set.

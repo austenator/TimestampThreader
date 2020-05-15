@@ -9,7 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class App {
+public class TimestampThreader {
   public static void main(String[] args) {
     // Currently point to single photo test folder. Can move to TestParentFolder later.
     final Path pathToParentFolder = Paths.get("src/test/TestDirectories");

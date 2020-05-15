@@ -64,7 +64,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>org.lifesync.App</mainClass>
+                            <mainClass>org.lifesync.TimestampThreader</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

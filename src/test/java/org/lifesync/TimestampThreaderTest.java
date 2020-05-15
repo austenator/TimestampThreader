@@ -5,10 +5,10 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DisplayName("AppTest")
-public class AppTest {
+public class TimestampThreaderTest {
   @DisplayName("successfully returns true")
   @Test
   void testApp_Success() {
-    assertTrue(App.isTrue());
+    assertTrue(TimestampThreader.isTrue());
   }
 }
