@@ -1,11 +1,9 @@
 package org.lifesync;
 
-import org.lifesync.model.MediaDetailsWithCaption;
 import org.lifesync.model.MediaFile;
 import org.lifesync.utilities.JsonReader;
 import org.lifesync.utilities.MediaHandler;
 
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 

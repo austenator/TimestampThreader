@@ -3,32 +3,38 @@ package org.lifesync.utilities;
 import org.lifesync.model.MediaDetailsWithCaption;
 import org.lifesync.model.MediaFile;
 
-import javax.print.attribute.standard.Media;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.attribute.BasicFileAttributes;
-import java.nio.file.attribute.PosixFileAttributes;
 
 /**
- * IN PROGRESS
+ * Handles processing different types of media sections in the {@link MediaFile}
  */
 public class MediaHandler {
   private final Path pathToOutputFolder;
   private final Path pathToMediaFolder;
   private final MediaFile mediaFile;
   private final MediaCopier mediaCopier;
+  private final MediaMetadataHandler metadataHandler;
 
+  /**
+   * Constructor.
+   * @param mediaFile The media file to process.
+   * @param pathToMediaFolder The path to the folder containing the original media.
+   */
   public MediaHandler (final MediaFile mediaFile, final Path pathToMediaFolder) {
     this.mediaFile = mediaFile;
     this.pathToMediaFolder = pathToMediaFolder;
     this.pathToOutputFolder = Paths.get("src/test/TestDirectories/TestOutputFolder");
     this.mediaCopier = new MediaCopier();
+    this.metadataHandler = new MediaMetadataHandler();
   }
 
+  /**
+   * Handles the 'photos' section.
+   */
   public void handlePhotos() {
     Path destination;
     try {
@@ -48,28 +54,8 @@ public class MediaHandler {
       // Copy photo to output folder.
       mediaCopier.copy(source, destination);
 
-      // Read in copied file.
-      File newPhoto = new File(destination.toString());
-
-      PosixFileAttributes attributes;
-
-      try {
-        attributes = Files.readAttributes(destination.toAbsolutePath(), PosixFileAttributes.class);
-      } catch (IOException e) {
-        throw new RuntimeException("Something went wrong when reading the file attributes.", e);
-      }
-
-      // Works!
-      System.out.println(attributes.creationTime());
-
-
-//      MediaMetadataHandler metadataHandler = new MediaMetadataHandler();
-//      metadataHandler.readMetadata(new File(source.toString()));
-//      metadataHandler.readMetadata(newPhoto);
-
-
-      // Edit created by + modified by.
-//      System.out.println(destination.toString());
+      // Modify newly created file's created date time with the details.
+      metadataHandler.updateTimestamps(destination, details.taken_at);
     }
   }
 }
