@@ -1,7 +1,9 @@
 package org.lifesync.utilities;
 
+import com.google.inject.Inject;
 import org.lifesync.model.MediaDetailsWithCaption;
 import org.lifesync.model.MediaFile;
+import org.lifesync.modules.PathToMediaFolder;
 
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
@@ -17,19 +19,28 @@ public class MediaHandler {
   private final Path pathToMediaFolder;
   private final MediaFile mediaFile;
   private final MediaCopier mediaCopier;
-  private final MediaMetadataHandler metadataHandler;
+  private final MediaMetadataHandler mediaMetadataHandler;
 
   /**
    * Constructor.
-   * @param mediaFile The media file to process.
-   * @param pathToMediaFolder The path to the folder containing the original media.
+   * @param pathToMediaFolder The injected constant of where the media is.
+   * @param jsonReader The reader for json files.
+   * @param mediaCopier The media copier.
+   * @param mediaMetadataHandler The media metadata handler.
    */
-  public MediaHandler (final MediaFile mediaFile, final Path pathToMediaFolder) {
-    this.mediaFile = mediaFile;
-    this.pathToMediaFolder = pathToMediaFolder;
+  @Inject
+  public MediaHandler (
+      @PathToMediaFolder final Path pathToMediaFolder,
+      final JsonReader jsonReader,
+      final MediaCopier mediaCopier,
+      final MediaMetadataHandler mediaMetadataHandler
+  ) {
+    final Path pathToMediaFile = pathToMediaFolder.resolve("media.json");
     this.pathToOutputFolder = Paths.get("src/test/TestDirectories/TestOutputFolder");
-    this.mediaCopier = new MediaCopier();
-    this.metadataHandler = new MediaMetadataHandler();
+    this.pathToMediaFolder = pathToMediaFolder;
+    this.mediaFile = jsonReader.read(pathToMediaFile.toString(), MediaFile.class);
+    this.mediaCopier = mediaCopier;
+    this.mediaMetadataHandler = mediaMetadataHandler;
   }
 
   /**
@@ -55,7 +66,7 @@ public class MediaHandler {
       mediaCopier.copy(source, destination);
 
       // Modify newly created file's created date time with the details.
-      metadataHandler.updateTimestamps(destination, details.taken_at);
+      mediaMetadataHandler.updateTimestamps(destination, details.taken_at);
     }
   }
 }

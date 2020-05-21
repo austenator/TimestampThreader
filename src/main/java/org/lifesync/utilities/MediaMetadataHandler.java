@@ -10,7 +10,6 @@ import java.time.OffsetDateTime;
  * Handles modification of file metadata.
  */
 public class MediaMetadataHandler {
-
   /**
    * Updates the creationTime and lastModifiedTime of the provided file (path) to the provided date-time.
    *

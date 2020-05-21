@@ -11,10 +11,15 @@ import static org.junit.jupiter.api.Assertions.*;
 public class JsonReaderTest {
   private static final String testToTestMediaFilePath = "src/test/TestDirectories/Test/media.json";
 
+  /**
+   * Class under test.
+   */
+  JsonReader jsonReader = new JsonReader();
+
   @DisplayName("successfully reads in the media file")
   @Test
   void test_Read_Success() {
-    MediaFile mediaFile = JsonReader.read(testToTestMediaFilePath, MediaFile.class);
+    MediaFile mediaFile = jsonReader.read(testToTestMediaFilePath, MediaFile.class);
     assertNotNull(mediaFile);
   }
 
@@ -22,7 +27,7 @@ public class JsonReaderTest {
   @Test
   void test_Read_ThrowsFileNotFoundException() {
     RuntimeException actualException =
-        assertThrows(RuntimeException.class, () -> JsonReader.read("non/existent/path", MediaFile.class));
+        assertThrows(RuntimeException.class, () -> jsonReader.read("non/existent/path", MediaFile.class));
     assertEquals("Something went wrong when reading in the media file.", actualException.getMessage());
   }
 }

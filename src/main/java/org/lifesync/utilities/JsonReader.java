@@ -9,8 +9,6 @@ import java.io.IOException;
  * Reads in Json files.
  */
 public class JsonReader {
-  private static final Gson gson = new Gson();
-
   /**
    * Reads in a Json file and converts it to an object of the given class type.
    * @param pathToFile the path from the root of the project ("src/.../") to the json file.
@@ -18,12 +16,12 @@ public class JsonReader {
    * @param <T> a gson acceptable class type
    * @return An object populated with the details of the json file.
    */
-  public static <T> T read(final String pathToFile, final Class<T> typeOfFile) {
+  public <T> T read(final String pathToFile, final Class<T> typeOfFile) {
     T jsonFile;
 
     try (FileReader reader = new FileReader(pathToFile))
     {
-      jsonFile = gson.fromJson(reader, typeOfFile);
+      jsonFile = new Gson().fromJson(reader, typeOfFile);
     } catch (IOException e) {
       throw new RuntimeException("Something went wrong when reading in the media file.", e);
     }
