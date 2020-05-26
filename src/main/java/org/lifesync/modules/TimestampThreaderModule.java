@@ -2,9 +2,7 @@ package org.lifesync.modules;
 
 import com.google.inject.AbstractModule;
 
-/**
- * Google Guice Module
- */
+/** Google Guice Module */
 public class TimestampThreaderModule extends AbstractModule {
   private final String pathToMediaFolder;
 

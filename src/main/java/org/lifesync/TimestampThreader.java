@@ -2,11 +2,10 @@ package org.lifesync;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import org.lifesync.modules.TimestampThreaderModule;
-import org.lifesync.utilities.MediaHandler;
-
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import org.lifesync.modules.TimestampThreaderModule;
+import org.lifesync.utilities.MediaHandler;
 
 public class TimestampThreader {
   public static void main(String[] args) {
@@ -14,7 +13,8 @@ public class TimestampThreader {
     final Path pathToParentFolder = Paths.get("src/test/TestDirectories");
     final Path pathToMediaFolder = pathToParentFolder.resolve("Test");
 
-    Injector injector = Guice.createInjector(new TimestampThreaderModule(pathToMediaFolder.toString()));
+    Injector injector =
+        Guice.createInjector(new TimestampThreaderModule(pathToMediaFolder.toString()));
     MediaHandler mediaHandler = injector.getInstance(MediaHandler.class);
     mediaHandler.handlePhotos();
     System.out.println("Done.");

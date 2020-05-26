@@ -1,19 +1,17 @@
 package org.lifesync.utilites;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.lifesync.model.MediaFile;
 import org.lifesync.utilities.JsonReader;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @DisplayName("JsonReader")
 public class JsonReaderTest {
   private static final String testToTestMediaFilePath = "src/test/TestDirectories/Test/media.json";
 
-  /**
-   * Class under test.
-   */
+  /** Class under test. */
   JsonReader jsonReader = new JsonReader();
 
   @DisplayName("successfully reads in the media file")
@@ -27,7 +25,9 @@ public class JsonReaderTest {
   @Test
   void test_Read_ThrowsFileNotFoundException() {
     RuntimeException actualException =
-        assertThrows(RuntimeException.class, () -> jsonReader.read("non/existent/path", MediaFile.class));
-    assertEquals("Something went wrong when reading in the media file.", actualException.getMessage());
+        assertThrows(
+            RuntimeException.class, () -> jsonReader.read("non/existent/path", MediaFile.class));
+    assertEquals(
+        "Something went wrong when reading in the media file.", actualException.getMessage());
   }
 }

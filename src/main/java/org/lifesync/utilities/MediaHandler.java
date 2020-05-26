@@ -1,19 +1,16 @@
 package org.lifesync.utilities;
 
 import com.google.inject.Inject;
-import org.lifesync.model.MediaDetailsWithCaption;
-import org.lifesync.model.MediaFile;
-import org.lifesync.modules.PathToMediaFolder;
-
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import org.lifesync.model.MediaDetailsWithCaption;
+import org.lifesync.model.MediaFile;
+import org.lifesync.modules.PathToMediaFolder;
 
-/**
- * Handles processing different types of media sections in the {@link MediaFile}
- */
+/** Handles processing different types of media sections in the {@link MediaFile} */
 public class MediaHandler {
   private final Path pathToOutputFolder;
   private final Path pathToMediaFolder;
@@ -23,18 +20,18 @@ public class MediaHandler {
 
   /**
    * Constructor.
+   *
    * @param pathToMediaFolder The injected constant of where the media is.
    * @param jsonReader The reader for json files.
    * @param mediaCopier The media copier.
    * @param mediaMetadataHandler The media metadata handler.
    */
   @Inject
-  public MediaHandler (
+  public MediaHandler(
       @PathToMediaFolder final Path pathToMediaFolder,
       final JsonReader jsonReader,
       final MediaCopier mediaCopier,
-      final MediaMetadataHandler mediaMetadataHandler
-  ) {
+      final MediaMetadataHandler mediaMetadataHandler) {
     final Path pathToMediaFile = pathToMediaFolder.resolve("media.json");
     this.pathToOutputFolder = Paths.get("src/test/TestDirectories/TestOutputFolder");
     this.pathToMediaFolder = pathToMediaFolder;
@@ -43,9 +40,7 @@ public class MediaHandler {
     this.mediaMetadataHandler = mediaMetadataHandler;
   }
 
-  /**
-   * Handles the 'photos' section.
-   */
+  /** Handles the 'photos' section. */
   public void handlePhotos() {
     Path destination;
     try {
@@ -54,7 +49,8 @@ public class MediaHandler {
       System.out.println("The directory exists as a file.");
       throw new RuntimeException("The directory exists as a file.", e);
     } catch (IOException e) {
-      throw new RuntimeException("Something went wrong when creating a new output directory for photos.", e);
+      throw new RuntimeException(
+          "Something went wrong when creating a new output directory for photos.", e);
     }
 
     for (MediaDetailsWithCaption details : mediaFile.photos) {
