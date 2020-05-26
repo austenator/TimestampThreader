@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import org.lifesync.modules.TimestampThreaderModule;
 import org.lifesync.utilities.MediaHandler;
 
+/** Main class that threads timestamps with media. */
 public class TimestampThreader {
   public static void main(String[] args) {
     // Currently point to single photo test folder. Can move to TestParentFolder later.
@@ -16,7 +17,9 @@ public class TimestampThreader {
     Injector injector =
         Guice.createInjector(new TimestampThreaderModule(pathToMediaFolder.toString()));
     MediaHandler mediaHandler = injector.getInstance(MediaHandler.class);
-    mediaHandler.handlePhotos();
+
+    //    mediaHandler.handlePhotos();
+    mediaHandler.handleStories();
     System.out.println("Done.");
   }
 

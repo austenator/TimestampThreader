@@ -1,5 +1,16 @@
 {
-    "stories": [],
+    "stories": [
+        {
+            "caption": "Go state",
+            "taken_at": "2018-01-30T01:10:23+00:00",
+            "path": "stories/201801/69038d414f2ec87b990faac3922b4728.mp4"
+        },
+        {
+            "caption": "We are the first customers ever.",
+            "taken_at": "2018-01-10T01:14:13+00:00",
+            "path": "stories/201801/2cf2f6a20fb748dd13fb5dd18ba92822.jpg"
+        }
+    ],
     "photos": [
         {
             "caption": "",
