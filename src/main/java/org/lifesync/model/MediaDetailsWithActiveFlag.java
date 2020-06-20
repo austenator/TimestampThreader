@@ -1,7 +1,5 @@
 package org.lifesync.model;
 
-public class MediaDetailsWithActiveFlag {
-  public String caption;
-  public String taken_at;
-  public String path;
+public class MediaDetailsWithActiveFlag extends MediaDetailsWithCaption {
+  public boolean is_active_profile;
 }

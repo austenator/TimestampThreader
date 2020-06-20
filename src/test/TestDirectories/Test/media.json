@@ -16,9 +16,41 @@
             "caption": "",
             "taken_at": "2012-10-23T02:01:53+00:00",
             "path": "photos/201210/b5aec679d6fee49db8885797633b17c5.jpg"
+        },
+        {
+            "caption": "Rowing in November.",
+            "taken_at": "2012-12-26T20:35:10+00:00",
+            "path": "photos/201212/5693da5194e099f5e1184bf08b859a1c.jpg"
         }
     ],
-    "videos": [],
-    "profile": [],
-    "direct": []
+    "videos": [
+        {
+            "caption": "Check out my latest side project of remixing my song \"Dark-out\". https://soundcloud.com/austenhenry/dark-out-remixed",
+            "taken_at": "2017-05-30T23:53:39+00:00",
+            "path": "videos/201705/e78478d5d304fbd2669ca1daed553e95.mp4"
+        },
+        {
+            "caption": "The single greatest video of all time.",
+            "taken_at": "2015-04-11T23:37:18+00:00",
+            "path": "videos/201504/8c7da6690a6231516cadcb3570fb5d1e.mp4"
+        }
+    ],
+    "profile": [
+        {
+            "caption": "",
+            "taken_at": "2020-03-07T14:22:07+00:00",
+            "is_active_profile": true,
+            "path": "profile/202003/d582c97296b58ac0cd4703a63fed9a6c.jpg"
+        }
+    ],
+    "direct": [
+        {
+            "taken_at": "2017-09-09T07:46:31.173916+00:00",
+            "path": "direct/201709/057f486dacf6d2828039b5e807951afe.jpg"
+        },
+        {
+            "taken_at": "2013-12-13T02:31:46.937348+00:00",
+            "path": "direct/201312/78b46902a63253bf7e83b7a16eef6399.jpg"
+        }
+    ]
 }

@@ -1,7 +1,5 @@
 package org.lifesync.model;
 
-public class MediaDetailsWithCaption {
+public class MediaDetailsWithCaption extends MediaDetailsBasic {
   public String caption;
-  public String taken_at;
-  public String path;
 }

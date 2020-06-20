@@ -11,7 +11,7 @@ public class MediaCopier {
    * @param source The path of the file to copy.
    * @param destination The path of the copied file to create.
    */
-  public void copy(final Path source, final Path destination) {
+  public void copy(final Path source, final Path destination) throws IOException {
     if (Files.exists(destination)) {
       return;
     }
@@ -24,16 +24,6 @@ public class MediaCopier {
           StandardCopyOption.COPY_ATTRIBUTES);
     } catch (UnsupportedOperationException e) {
       throw new RuntimeException("Invalid copy option. (Shouldn't be thrown).", e);
-    } catch (DirectoryNotEmptyException e) {
-      throw new RuntimeException("The destination directory is not empty.", e);
-    } catch (IOException e) {
-      throw new RuntimeException(
-          "A problem occurred while copying "
-              + source.toString()
-              + " to "
-              + destination.toString()
-              + ".",
-          e);
     }
   }
 }

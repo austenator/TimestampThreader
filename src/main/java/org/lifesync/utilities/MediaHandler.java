@@ -6,7 +6,9 @@ import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import org.lifesync.model.MediaDetailsWithCaption;
+import java.util.List;
+
+import org.lifesync.model.MediaDetailsBasic;
 import org.lifesync.model.MediaFile;
 import org.lifesync.modules.PathToMediaFolder;
 
@@ -35,7 +37,8 @@ public class MediaHandler {
       final MediaMetadataHandler mediaMetadataHandler) {
     final Path pathToMediaFolder = Path.of(stringPathToMediaFolder);
     final Path pathToMediaFile = pathToMediaFolder.resolve("media.json");
-    this.pathToOutputFolder = Paths.get("src/test/TestDirectories/TestOutputFolder");
+    this.pathToOutputFolder = Paths.get("/Users/austen/Documents/Social Media Archives/InstagramThreadedOutput");
+//    this.pathToOutputFolder = Paths.get("src/test/TestDirectories/TestOutputFolder");
     this.pathToMediaFolder = pathToMediaFolder;
     this.mediaFile = jsonReader.read(pathToMediaFile.toString(), MediaFile.class);
     this.mediaCopier = mediaCopier;
@@ -46,29 +49,52 @@ public class MediaHandler {
   public void handleStories() {
     // TODO > Combine with handlePhotos.
     Path storiesDirectory = createDirectory("stories");
-    for (MediaDetailsWithCaption details : mediaFile.stories) {
-      Path source = pathToMediaFolder.resolve(details.path);
-      String fileName = source.getFileName().toString();
-      Path destination = storiesDirectory.resolve(fileName);
-
-      // Copy photo to output folder.
-      mediaCopier.copy(source, destination);
-
-      // Modify newly created file's created date time with the details.
-      mediaMetadataHandler.updateTimestamps(destination, details.taken_at);
-    }
+    handleBasicMedia(storiesDirectory, mediaFile.stories);
   }
 
   /** Handles the 'photos' section. */
   public void handlePhotos() {
-    Path destination = createDirectory("photos");
-    for (MediaDetailsWithCaption details : mediaFile.photos) {
+    Path photosDirectory = createDirectory("photos");
+    handleBasicMedia(photosDirectory, mediaFile.photos);
+  }
+
+  /** Handles the 'direct' section. */
+  public void handleDirect() {
+    Path directDirectory = createDirectory("direct");
+    handleBasicMedia(directDirectory, mediaFile.direct);
+  }
+
+  /** Handles the 'videos' section. */
+  public void handleVideos() {
+    Path videosDirectory = createDirectory("videos");
+    handleBasicMedia(videosDirectory, mediaFile.videos);
+  }
+
+  /** Handles the 'profile' section. */
+  public void handleProfile() {
+    Path profileDirectory = createDirectory("profile");
+    handleBasicMedia(profileDirectory, mediaFile.profile);
+  }
+
+  /**
+   * Generically copies and updates timestamps of all specified media.
+   * @param outputDirectory The sub-directory to place all updated media into inside of the output directory.
+   * @param mediaFileSection The section of the media file to iterate over and process.
+   * @param <T> Basic details class.
+   */
+  private <T extends MediaDetailsBasic> void handleBasicMedia(Path outputDirectory, List<T> mediaFileSection) {
+    for (MediaDetailsBasic details : mediaFileSection) {
       Path source = pathToMediaFolder.resolve(details.path);
       String fileName = source.getFileName().toString();
-      destination = destination.resolve(fileName);
+      Path destination = outputDirectory.resolve(fileName);
 
-      // Copy photo to output folder.
-      mediaCopier.copy(source, destination);
+      try {
+        // Copy photo to output folder.
+        mediaCopier.copy(source, destination);
+      } catch (IOException e) {
+        // Skip the current file. Instagram didn't include ALL the downloaded data.
+        continue;
+      }
 
       // Modify newly created file's created date time with the details.
       mediaMetadataHandler.updateTimestamps(destination, details.taken_at);
