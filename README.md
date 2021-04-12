@@ -1,4 +1,4 @@
-# Time-stamp Threader
+# Social Media Timestamp Threader
 Threads downloaded social media data with their respective timestamps.
 ### Trello Board
 - https://trello.com/b/MjoNYlHw/time-stamp-threader
